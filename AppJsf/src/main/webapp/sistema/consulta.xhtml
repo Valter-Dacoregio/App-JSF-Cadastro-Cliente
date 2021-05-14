@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+ 
+ 
+<ui:composition template="/template/layoutBase.xhtml">
+ 
+	<ui:define name="content">
+		
+	<h:form>
+		<p:fieldset legend="Filtrar Por" collapsed="true" toggleable="true">
+			
+			<h:panelGrid columns="2">
+				
+				<h:panelGrid>
+		 			<p:outputLabel value="Nome" for="inputText-nome"/>
+		        	<p:inputText id="inputText-nome"
+		        		style="width:300px" maxlength="70" 
+		        		value="#{consultaController.pessoaFilter.nome}" />
+				</h:panelGrid>
+				
+				<h:panelGrid>
+		 			<p:outputLabel value="CPF" for="inputText-cpf"/>
+		        	<p:inputText id="inputText-cpf"
+		        		style="width:300px" maxlength="70" 
+		        		value="#{consultaController.pessoaFilter.cpf}" />
+				</h:panelGrid>
+				
+			</h:panelGrid> 
+			
+			<h:panelGrid columns="3">    		
+				
+				<h:panelGrid>
+		 			<p:outputLabel value="Razão Social" for="inputText-razaoSocial"/>
+		        	<p:inputText id="inputText-razaoSocial"
+		        		style="width:300px" maxlength="70" 
+		        		value="#{consultaController.pessoaFilter.razaoSocial}" />
+				</h:panelGrid>
+				
+				<h:panelGrid>
+		 			<p:outputLabel value="Nome Fantasia" for="inputText-nomeFantasia"/>
+		        	<p:inputText id="inputText-nomeFantasia"
+		        		style="width:300px" maxlength="70" 
+		        		value="#{consultaController.pessoaFilter.nomeFantasia}" />
+				</h:panelGrid>
+				
+				<h:panelGrid>
+		 			<p:outputLabel value="CNPJ" for="inputText-cnpj"/>
+		        	<p:inputText id="inputText-cnpj"
+		        		style="width:300px" maxlength="70" 
+		        		value="#{consultaController.pessoaFilter.cnpj}" />
+				</h:panelGrid>	        		
+	        		
+			</h:panelGrid>
+				
+         	<p:commandButton value="Pesquisar" 
+         		id="commandButton-pesquisar"
+			 	icon="ui-icon-gear"
+			 	action="#{consultaController.buscar}"
+			 	update="idTabela" />
+			 	
+		</p:fieldset>
+	    
+	    <div class="card">
+	        <p:dataTable id="idTabela" var="pessoa" value="#{consultaController.pessoas}"
+	        	paginator="true" rows="10" rowsPerPageTemplate="5,10,15" rowKey="#{item.id}"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
+				emptyMessage="Nenhum registro encontrado." currentPageReportTemplate="Exibindo de {startRecord} a {endRecord} no total de {totalRecords} - Página: {currentPage}/{totalPages}" >
+	            <p:column headerText="ID">
+	                <h:outputText value="#{pessoa.id}" />
+	            </p:column>
+	            
+	            <p:column headerText="Tipo">
+	                <h:outputText value="#{pessoa.tipo eq 'F' ? 'PF' : 'PJ'}" />
+	            </p:column>
+	            
+	            <p:column headerText="Nome">
+	                <h:outputText rendered="#{pessoa.tipo eq 'F'}" value="#{pessoa.nome}" />
+	                <h:outputText rendered="#{pessoa.tipo eq 'J'}" value=" - " />
+	            </p:column>
+
+	            <p:column headerText="CPF">
+	                <h:outputText rendered="#{pessoa.tipo eq 'F'}" value="#{pessoa.cpf}" />
+	                <h:outputText rendered="#{pessoa.tipo eq 'J'}" value=" - " />
+	            </p:column>
+	            
+	            <p:column headerText="Dt. Nasc.">
+	                <h:outputText rendered="#{pessoa.tipo eq 'F'}" value="#{pessoa.dataNascimentoFormatada}" />
+	                <h:outputText rendered="#{pessoa.tipo eq 'J'}" value=" - " />
+	            </p:column>
+
+	            <p:column headerText="Telefone">
+	                <h:outputText rendered="#{pessoa.tipo eq 'F'}" value="#{pessoa.telefone}" />
+	                <h:outputText rendered="#{pessoa.tipo eq 'J'}" value=" - " />
+	            </p:column>
+	            
+	            <p:column headerText="E-Mail">
+	                <h:outputText rendered="#{pessoa.tipo eq 'F'}" value="#{pessoa.email}" />
+	                <h:outputText rendered="#{pessoa.tipo eq 'J'}" value=" - " />
+	            </p:column>
+	            
+	            <p:column headerText="Razão Social">
+	                <h:outputText rendered="#{pessoa.tipo eq 'F'}" value=" - " />
+	                <h:outputText rendered="#{pessoa.tipo eq 'J'}" value="#{pessoa.razaoSocial}" />
+	            </p:column>	            
+
+	            <p:column headerText="Nome Fantasia">
+	                <h:outputText rendered="#{pessoa.tipo eq 'F'}" value=" - " />
+	                <h:outputText rendered="#{pessoa.tipo eq 'J'}" value="#{pessoa.nomeFantasia}" />
+	            </p:column>	 
+
+	            <p:column headerText="CNPJ">
+	                <h:outputText rendered="#{pessoa.tipo eq 'F'}" value=" - " />
+	                <h:outputText rendered="#{pessoa.tipo eq 'J'}" value="#{pessoa.cnpj}" />
+	            </p:column>	 
+	            
+	            <p:column headerText="Site">
+	                <h:outputText rendered="#{pessoa.tipo eq 'F'}" value=" - " />
+	                <h:outputText rendered="#{pessoa.tipo eq 'J'}" value="#{pessoa.site}" />
+	            </p:column>
+	            
+	            <p:column headerText="Ações">
+	            	<p:commandButton title="Editar" icon="pi pi-pencil" style="background-color: orange; border-color: orange;" action="#{consultaController.prepareEditar}">
+	            		<f:setPropertyActionListener value="#{pessoa}" target="#{consultaController.pessoa}" />
+	            	</p:commandButton>
+	            	
+<!-- 	                <p:commandButton id="idBotaoExcluir" title="Excluir" icon="pi pi-times" style="background-color: red; border-color: red;"  -->
+<!-- 	                	oncomplete="PF('confirmExcluir').show();" update="formConfirmExcluir"  > -->
+<!-- 	                	<f:setPropertyActionListener value="#{pessoa}" target="#{consultaController.pessoa}" /> -->
+<!-- 	            	</p:commandButton> -->
+	                <p:commandButton id="idBotaoExcluir" title="Excluir" icon="pi pi-times" style="background-color: red; border-color: red;" 
+	                	update="@form" action="#{consultaController.excluir}" >
+	            		<f:setPropertyActionListener value="#{pessoa}" target="#{consultaController.pessoa}" />
+	            	</p:commandButton>	            	
+	            </p:column>	 
+	            
+	        </p:dataTable>
+	    </div>
+	</h:form>
+	
+<!-- 	<p:confirmDialog widgetVar="confirmExcluir" message="Deseja realmente excluir este registro?"> -->
+<!-- 		<h:form id="formConfirmExcluir"> -->
+<!-- 			<p:commandButton value="Sim" action="#{consultaController.excluir}" oncomplete="PF('confirmExcluir').hide();" /> -->
+<!-- 			<p:commandButton value="Não" onclick="PF('confirmExcluir').hide();" />		 -->
+<!-- 		</h:form> -->
+<!-- 	</p:confirmDialog> -->
+		
+	</ui:define>
+ 
+</ui:composition>
+</html>

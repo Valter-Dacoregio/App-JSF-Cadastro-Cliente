@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<body>
+
+	<h:head>
+		<h:outputStylesheet library="css" name="default.css" />
+	</h:head>
+
+
+	<div id="header">
+		<ui:include src="header.xhtml" />
+	</div>
+
+	<div id="content" style="margin-top: 5%;">
+		<ui:insert name="content">
+		</ui:insert>
+
+
+<!-- 		<ui:define name="conteudo"> -->
+<!-- 			<p:growl id="growl" autoUpdate="true" /> -->
+			
+<!-- 			<h:panelGroup id="conteudo"> -->
+<!-- 				<p:panel header="Cadastro de #{nome}" rendered="#{bean.cadastrarState || bean.editarState}"> -->
+<!-- 					<h:form id="cadastro"> -->
+<!-- 						<ui:insert name="cadastro" /> -->
+						
+<!-- 						<ui:insert name="botaoCadastro"> -->
+<!-- 							<p:commandButton value="#{entidade.id == null ? 'Cadastrar' : 'Alterar'}" -->
+<!-- 									action="#{bean.gravar}" ajax="true" process="@form" update=":conteudo" /> -->
+<!-- 						</ui:insert> -->
+<!-- 						<p:commandButton value="Voltar" action="#{bean.voltar}" process="@this" ajax="true" update=":conteudo" /> -->
+<!-- 					</h:form> -->
+<!-- 				</p:panel> -->
+				
+<!-- 				<p:panel id="panelPesquisa" header="#{nome}" rendered="#{bean.pesquisarState}"> -->
+<!-- 					<h:form id="pesquisa"> -->
+<!-- 						<p:fieldset legend="Filtrar Por:" toggleable="true" collapsed="true"> -->
+<!-- 							<ui:insert name="pesquisaPanel"> -->
+<!-- 								<h:panelGrid columns="2"> -->
+<!-- 									<ui:insert name="pesquisa" /> -->
+<!-- 								</h:panelGrid> -->
+<!-- 							</ui:insert> -->
+<!-- 							<ui:insert name="botaoPesquisa"> -->
+<!-- 								<p:commandButton value="Pesquisar" action="#{bean.pesquisar}" process="@form" update=":lista" /> -->
+<!-- 							</ui:insert> -->
+<!-- 						</p:fieldset> -->
+<!-- 					</h:form> -->
+					
+<!-- 					<h:form id="lista"> -->
+<!-- 						<p:dataTable value="#{bean.lista}" var="item" rowStyleClass="#{rowStyleClass}" paginator="true" rows="10" rowsPerPageTemplate="5,10,15" lazy="true" rowKey="#{item.id}" rowData="#{item.dataStorage}" -->
+<!-- 								paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" emptyMessage="Nenhum registro encontrado." -->
+<!-- 								currentPageReportTemplate="Exibindo de {startRecord} a {endRecord} no total de {totalRecords} - Página: {currentPage}/{totalPages}" style="padding: 10px 2px;"> -->
+							
+<!-- 							<ui:insert name="lista" /> -->
+							
+<!-- 							<ui:insert name="listaAcoes"> -->
+<!-- 								<p:column headerText="Ações" style="width: 105px;"> -->
+								
+<!-- 									<ui:insert name="acaoEditar"> -->
+<!-- 										<p:commandButton rendered="#{bean.podeEditar}" title="Editar" action="#{bean.prepareEditar}" update=":conteudo" icon="ui-icon ui-icon-pencil"> -->
+<!-- 											<f:setPropertyActionListener target="#{entidade}" value="#{item}" /> -->
+<!-- 										</p:commandButton> -->
+<!-- 									</ui:insert> -->
+									
+<!-- 									<ui:insert name="acaoExcluir"> -->
+<!-- 										<p:commandButton rendered="#{bean.podeExcluir}" title="Excluir" update=":conteudo" icon="ui-icon ui-icon-close" oncomplete="confirmation.show()"> -->
+<!-- 											<f:setPropertyActionListener target="#{entidade}" value="#{item}" /> -->
+<!-- 										</p:commandButton> -->
+<!-- 									</ui:insert> -->
+<!-- 								</p:column> -->
+<!-- 							</ui:insert> -->
+							
+<!-- 							<f:facet name="footer"> -->
+<!-- 								<ui:insert name="acaoCadastrar"> -->
+<!-- 									<p:commandButton value="Cadastrar" action="#{bean.prepareCadastrar}" ajax="true" update=":conteudo" /> -->
+<!-- 								</ui:insert> -->
+<!-- 							</f:facet> -->
+<!-- 						</p:dataTable> -->
+<!-- 					</h:form> -->
+<!-- 				</p:panel> -->
+<!-- 			</h:panelGroup> -->
+<!-- 		</ui:define> -->
+		
+	</div>
+
+	<div id="footer">
+		<ui:include src="footer.xhtml" />
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+ 
+<h:head>
+</h:head>
+ 
+<ui:composition template="/template/layoutBase.xhtml">
+ 
+	<ui:define name="content">
+ 
+		   <p:tabView style="width:600px;height:370px;margin:auto;">
+	 		 	<p:tab title="Cadastro de Pessoa Física">
+ 
+	 		 	<h:form id="form-cadastro">
+	 		 	
+	 		 	<p:growl id="growl-mensagem" showDetail="true" sticky="true" /> 
+ 
+	 		 	<h:panelGrid id="panelGrid-campos-form" columns="2" cellpadding="10">
+ 									
+ 									<p:outputLabel value="ID" for="inputText-id" style="display:none;" />
+ 									<p:inputText id="inputText-id" value="#{cadastroPFController.pessoaFisicaModel.id}" style="display:none;" />
+ 									
+				 		 			<p:outputLabel value="Nome" for="inputText-nome"/>
+				            		<p:inputText id="inputText-nome"
+				            				  style="width:300px" maxlength="70" 
+				            				  value="#{cadastroPFController.pessoaFisicaModel.nome}"
+				            				  required="true"
+				            				  requiredMessage="O nome é de preenchimento obrigatório"/>
+		
+				 		 			<p:outputLabel value="CPF" for="inputText-cpf"/>
+				            		<p:inputText id="inputText-cpf"
+				            				  style="width:300px" maxlength="11" 
+				            				  value="#{cadastroPFController.pessoaFisicaModel.cpf}"
+				            				  required="true"
+				            				  requiredMessage="O CPF é de preenchimento obrigatório"/>
+		            				 
+		            				 <p:outputLabel value="Data Nascimento" />
+		            				 <p:datePicker id="basic"
+				            				  style="width:300px" maxlength="10" 
+				            				  value="#{cadastroPFController.pessoaFisicaModel.dataNascimento}"
+				            				  required="true"
+				            				  requiredMessage="A Data Nascimento é de preenchimento obrigatório"/>
+			 
+			 	            		<p:outputLabel value="Telefone" for="inputText-telefone"/>
+				            		<p:inputText id="inputText-telefone"
+				            			     style="width:300px" 
+				            			     maxlength="17" 
+				            			     value="#{cadastroPFController.pessoaFisicaModel.telefone}"
+				            			     required="true"
+				            			     requiredMessage="O Telefone é de preenchimento obrigatório"/>  
+				            			     
+				            		<p:outputLabel value="E-mail" for="inputText-email"/>
+				            		<p:inputText id="inputText-email"
+				            			     style="width:300px" 
+				            			     maxlength="80" 
+				            			     value="#{cadastroPFController.pessoaFisicaModel.email}"
+				            			     required="true"
+				            			     requiredMessage="O email é de preenchimento obrigatório"/>       		
+ 
+	            		<p:spacer/>
+ 
+	            		<p:commandButton value="#{cadastroPFController.pessoaFisicaModel.id eq null ? 'Salvar' : 'Alterar'}" 
+            				 id="commandButton-salvar"
+							 icon="ui-icon-gear"
+							 action="#{cadastroPFController.salvar}"
+							 update="panelGrid-campos-form growl-mensagem" />
+ 
+	 		 		</h:panelGrid>
+ 
+	 		 		</h:form>
+ 
+	 			 </p:tab>		 		
+ 
+	 		</p:tabView>
+ 
+	</ui:define>
+ 
+</ui:composition>
+ 
+</html>

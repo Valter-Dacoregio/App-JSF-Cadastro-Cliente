@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+ 
+<h:head>
+</h:head>
+ 
+<ui:composition template="/template/layoutBase.xhtml">
+ 
+	<ui:define name="content">
+ 
+		   <p:tabView style="width:600px;height:370px;margin:auto;">
+	 		 	<p:tab title="Cadastro de Pessoa Jurídica">
+ 
+	 		 	<h:form id="form-cadastro">
+	 		 	
+	 		 	<p:growl id="growl-mensagem" showDetail="true" sticky="true" /> 
+ 
+	 		 	<h:panelGrid id="panelGrid-campos-form" columns="1" cellpadding="10">
+ 						
+ 						<h:panelGrid columns="2">
+							<p:outputLabel value="ID" for="inputText-id" style="display:none;" />
+							<p:inputText id="inputText-id" value="#{cadastroPJController.pessoaJuridicaModel.id}" style="display:none;" />
+							
+		 		 			<p:outputLabel value="Razão Social" for="inputText-razaoSocial"/>
+		            		<p:inputText id="inputText-razaoSocial" 
+		            				  style="width:300px" maxlength="70" 
+		            				  value="#{cadastroPJController.pessoaJuridicaModel.razaoSocial}"
+		            				  required="true"
+		            				  requiredMessage="A Razão Social é de preenchimento obrigatório"/>
+		            				  
+		 		 			<p:outputLabel value="Nome Fantasia" for="inputText-nomeFantasia"/>
+		            		<p:inputText id="inputText-nomeFantasia" 
+		            				  style="width:300px" maxlength="70" 
+		            				  value="#{cadastroPJController.pessoaJuridicaModel.nomeFantasia}"
+		            				  required="true"
+		            				  requiredMessage="O Nome Fantasia é de preenchimento obrigatório"/>
+		            				  
+		 		 			<p:outputLabel value="CNPJ" for="inputText-cnpj"/>
+		            		<p:inputText id="inputText-cnpj" 
+		            				  style="width:300px" maxlength="15" 
+		            				  value="#{cadastroPJController.pessoaJuridicaModel.cnpj}"
+		            				  required="true"
+		            				  requiredMessage="O CNPJ é de preenchimento obrigatório"/>
+		            				  
+	 	            		<p:outputLabel value="Telefones"/>
+							<h:panelGrid columns="2">
+			            		<p:inputText id="inputText-telefones" 
+			            			     style="width:300px" 
+			            			     maxlength="80" 
+			            			     value="#{cadastroPJController.telefone}"
+			            			     required="#{cadastroPJController.pessoaJuridicaModel.telefones.isEmpty()}"
+			            			     requiredMessage="É necessário adicionar ao menos um Telefone"/> 
+		            		<p:commandButton title="Adicionar" 
+	            				 id="commandButton-adicionar"
+								 icon="pi pi-plus"
+								 action="#{cadastroPJController.adicionarTelefone}"
+								 process="@this inputText-telefones"
+								 update="@this tabela inputText-telefones growl-mensagem" />
+							</h:panelGrid>
+						</h:panelGrid>
+						
+						
+						<p:dataTable id="tabela" value="#{cadastroPJController.pessoaJuridicaModel.telefones}" var="telefone" >
+							<p:column headerText="Número">
+								<h:outputText value="#{telefone}" />
+							</p:column>
+							<p:column headerText="Ações">
+			            		<p:commandButton title="Excluir"
+		            				 id="idBotaoExcluir"
+									 icon="pi pi-times"
+									 action="#{cadastroPJController.removerTelefone}"
+									 update="tabela"
+									 style="background-color: red; border-color: red;" >
+				            		<f:setPropertyActionListener value="#{telefone}" target="#{cadastroPJController.telefone}" />
+				            	</p:commandButton>	   
+							</p:column>
+						</p:dataTable>
+						
+						<h:panelGrid columns="2">
+		            		<p:outputLabel value="Site" for="inputText-site"/>
+		            		<p:inputText id="inputText-site" 
+		            			     style="width:300px" 
+		            			     maxlength="80" 
+		            			     value="#{cadastroPJController.pessoaJuridicaModel.site}"
+		            			     required="true"
+		            			     requiredMessage="O Site é de preenchimento obrigatório"/>           		
+						</h:panelGrid>
+ 
+	            		<p:spacer/>
+ 
+	            		<p:commandButton value="#{cadastroPJController.pessoaJuridicaModel.id eq null ? 'Salvar' : 'Alterar'}" 
+            				 id="commandButton-salvar"
+							 icon="ui-icon-gear"
+							 action="#{cadastroPJController.salvar}"
+							 update="panelGrid-campos-form growl-mensagem" />
+ 
+	 		 		</h:panelGrid>
+ 
+	 		 		</h:form>
+ 
+	 			 </p:tab>		 		
+ 
+	 		</p:tabView>
+ 
+	</ui:define>
+ 
+</ui:composition>
+ 
+</html>
